@@ -19,16 +19,16 @@ type confClient struct {
 	Pull func(ns PluginConfNS) ([]byte, error)
 }
 
-func (c *ConfService) Pull(pluginName string) ([]byte, error){
-	if b, ok := c.store[pluginName]; ok {
+func (c *ConfService) Pull(ns PluginConfNS) ([]byte, error){
+	if b, ok := c.store[ns]; ok {
 		return b, nil
 	}else{
 		return nil, errors.New("conf: plugin conf doesn't exist")
 	}
 }
 
-func (c *ConfService) Store(pluginName string, b []byte) error {
-	c.store[pluginName] = b
+func (c *ConfService) Store(ns PluginConfNS, b []byte) error {
+	c.store[ns] = b
 	return nil
 }
 
